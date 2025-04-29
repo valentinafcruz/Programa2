@@ -1,0 +1,1 @@
+def rolar_dado():
