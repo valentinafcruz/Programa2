@@ -18,3 +18,13 @@ def guardar_dado(dados_rolados, dados_guardados, dado_p_guardar):
             novos_dados_rolados.append(dados_rolados[i])
         i += 1
     return [novos_dados_rolados, dados_guardados]
+
+def remover_dado(dados_rolados, dados_guardados, dado_p_remover):
+    dados_rolados.append(dados_guardados[dado_p_remover])
+    novos_dados_guardados = []
+    i = 0
+    while i < len(dados_guardados):
+        if i != dado_p_remover:
+            novos_dados_guardados.append(dados_guardados[i])
+        i += 1
+    return [dados_rolados, novos_dados_guardados]
