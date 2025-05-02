@@ -81,3 +81,19 @@ def calcula_pontos_sequencia_alta(dados_rolados):
         return 30
     else: 
         return 0
+
+def calcula_pontos_full_house(dados_rolados):
+    A = dados_rolados.count(1)
+    B = dados_rolados.count(2)
+    C = dados_rolados.count(3)
+    D = dados_rolados.count(4)
+    E = dados_rolados.count(5)
+    F = dados_rolados.count(6)
+    if A == 3 or B == 3 or C == 3 or D == 3 or E == 3 or F == 3:
+        if A == 2 or B == 2 or C == 2 or D == 2 or E == 2 or F == 2:
+            soma = 0
+            for num in dados_rolados:
+                soma += num
+            return soma
+    return 0
+
