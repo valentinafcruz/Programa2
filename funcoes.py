@@ -121,3 +121,14 @@ def calcula_pontos_quina(dados_rolados):
     if A >= 5 or B >= 5 or C >= 5 or D >= 5 or E >= 5 or F >= 5:
             return 50
     return 0
+
+def calcula_pontos_regra_avancada(dados_rolados):
+    dic = {
+    'cinco_iguais': calcula_pontos_quina(dados_rolados),
+    'full_house': calcula_pontos_full_house(dados_rolados),
+    'quadra': calcula_pontos_quadra(dados_rolados),
+    'sem_combinacao': calcula_pontos_soma(dados_rolados),
+    'sequencia_alta': calcula_pontos_sequencia_alta(dados_rolados),
+    'sequencia_baixa': calcula_pontos_sequencia_baixa(dados_rolados)
+    }
+    return dic
