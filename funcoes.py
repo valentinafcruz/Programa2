@@ -45,3 +45,9 @@ def calcula_pontos_regra_simples(dados_rolados):
         dicionario[5] = E*5
         dicionario[6] = F*6
     return dicionario
+
+def calcula_pontos_soma(dados_rolados):
+    X = 0
+    for i in range(len(dados_rolados)):
+        X += dados_rolados[i]
+    return X
