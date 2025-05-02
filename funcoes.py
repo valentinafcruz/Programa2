@@ -110,3 +110,14 @@ def calcula_pontos_quadra(dados_rolados):
                 soma += num
             return soma
     return 0
+
+def calcula_pontos_quina(dados_rolados):
+    A = dados_rolados.count(1)
+    B = dados_rolados.count(2)
+    C = dados_rolados.count(3)
+    D = dados_rolados.count(4)
+    E = dados_rolados.count(5)
+    F = dados_rolados.count(6)
+    if A >= 5 or B >= 5 or C >= 5 or D >= 5 or E >= 5 or F >= 5:
+            return 50
+    return 0
