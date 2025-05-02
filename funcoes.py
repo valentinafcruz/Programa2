@@ -59,11 +59,11 @@ def calcula_pontos_sequencia_baixa(dados_rolados):
     D = dados_rolados.count(4)
     E = dados_rolados.count(5)
     F = dados_rolados.count(6)
-    if A > 1 and B > 1 and C > 1 and D > 1:
+    if A >= 1 and B >= 1 and C >= 1 and D >= 1:
         return 15
-    if E > 1 and B > 1 and C > 1 and D > 1:
+    if E >= 1 and B >= 1 and C >= 1 and D >= 1:
         return 15
-    if E > 1 and F > 1 and C > 1 and D > 1:
+    if E >= 1 and F >= 1 and C >= 1 and D >= 1:
         return 15
     else: 
         return 0
