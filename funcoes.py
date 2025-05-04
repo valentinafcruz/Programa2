@@ -132,3 +132,14 @@ def calcula_pontos_regra_avancada(dados_rolados):
     'sequencia_baixa': calcula_pontos_sequencia_baixa(dados_rolados)
     }
     return dic
+
+def faz_jogada(dados, categoria, cartela):
+    if len(categoria) == 1:
+        categoria = int(categoria)
+    simples = calcula_pontos_regra_simples(dados)
+    avancada = calcula_pontos_regra_avancada(dados)
+    if categoria in simples:
+        cartela['regra_simples'][categoria] = simples[categoria]
+    else:
+        cartela['regra_avancada'][categoria] = avancada[categoria]
+    return cartela
