@@ -24,6 +24,7 @@ soma=0
 funcoes.imprime_cartela(cartela_de_pontos) #printa a cartela vazia no início do jogo
 
 simples =['1', '2', '3', '4', '5', '6']
+avancado = ['sem_combinacao', 'quadra', 'full_house', 'sequencia_baixa', 'sequencia_alta', 'cinco_iguais']
 
 for i in range(12): #12 rodadas do jogo
     guardados =[]
@@ -68,27 +69,28 @@ for i in range(12): #12 rodadas do jogo
             print(f"Dados guardados: {guardados}")
         else:
             print("Opção inválida. Tente novamente.")
+    if pergunta != '0':
         print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
         pergunta = input('>')
-    categoria_valida = False
-    while not categoria_valida:
-        print("Digite a combinação desejada:")
-        categoria = input('>')
-        if categoria in simples:  # simples = ['1', '2', '3', '4', '5', '6']
-            cat = int(categoria)  
-            if cartela_de_pontos['regra_simples'][cat] == -1:
-                funcoes.faz_jogada(guardados + dados_rolados, cat, cartela_de_pontos)
-                categoria_valida = True
-            else:
-                print("Essa combinação já foi utilizada.")
-        elif categoria in cartela_de_pontos['regra_avancada'].keys():
-            if cartela_de_pontos['regra_avancada'][categoria] == -1:
-                funcoes.faz_jogada(guardados + dados_rolados, categoria, cartela_de_pontos)
-                categoria_valida = True
-            else:
-                print("Essa combinação já foi utilizada.")
-        else:
-            print("Combinação inválida. Tente novamente.")
+    else:
+        categoria_valida = False
+        while not categoria_valida:
+            print("Digite a combinação desejada:")
+            categoria = input('>')
+            if categoria in ['1', '2', '3', '4', '5', '6']:
+                if cartela_de_pontos['regra_simples'][int(categoria)] == -1:
+                    funcoes.faz_jogada(guardados + dados_rolados, categoria, cartela_de_pontos)
+                    categoria_valida = True
+                else:
+                    print("Essa combinação já foi utilizada.")
+            if categoria in ['sem_combinacao', 'quadra', 'full_house', 'sequencia_baixa', 'sequencia_alta', 'cinco_iguais']:
+                if cartela_de_pontos['regra_avancada'][categoria] == -1:
+                    funcoes.faz_jogada(guardados + dados_rolados, categoria, cartela_de_pontos)
+                    categoria_valida = True
+                else:
+                    print("Essa combinação já foi utilizada.")
+            if categoria not in ['1', '2', '3', '4', '5', '6'] and categoria not in ['sem_combinacao', 'quadra', 'full_house', 'sequencia_baixa', 'sequencia_alta', 'cinco_iguais']:
+                print("Combinação inválida. Tente novamente.")
 
 for pontos in cartela_de_pontos['regra_simples'].values():
     soma += pontos

@@ -134,7 +134,7 @@ def calcula_pontos_regra_avancada(dados_rolados):
     return dic
 
 def faz_jogada(dados, categoria, cartela):
-    if len(categoria) == 1:
+    if len(str(categoria)) == 1:
         categoria = int(categoria)
     simples = calcula_pontos_regra_simples(dados)
     avancada = calcula_pontos_regra_avancada(dados)
