@@ -20,32 +20,82 @@ cartela_de_pontos = {
     }
 }
 
-funcoes.imprime_cartela(cartela_de_pontos)
+soma=0
+funcoes.imprime_cartela(cartela_de_pontos) #printa a cartela vazia no início do jogo
 
-for i in range(12):
+simples =['1', '2', '3', '4', '5', '6']
+
+for i in range(12): #12 rodadas do jogo
     guardados =[]
     rerrolagens = 2
     dados_rolados = funcoes.rolar_dados(5)
-    dados_guardados = funcoes.guardar_dado(dados_rolados, dados_guardados, dado_p_guardar)
  
     print(f"Dados rolados: {dados_rolados}")
-    print(f"Dados guardados: {dados_guardados}")
-    pergunta1 = int(input("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:"))
+    print(f"Dados guardados: {guardados}")
+    print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+    pergunta = input('>')
+    while pergunta != '0':
+        if pergunta == '1':
+            print("Digite o índice do dado a ser guardado (0 a 4):")
+            p1 = int(input('>'))
+            guardar_dado = funcoes.guardar_dado(dados_rolados, guardados, p1)
+            dados_rolados = guardar_dado[0]
+            guardados = guardar_dado[1]
+            print(f"Dados rolados: {dados_rolados}")
+            print(f"Dados guardados: {guardados}")
+        elif pergunta == '2':
+            print("Digite o índice do dado a ser removido (0 a 4):")
+            p2 = int(input('>'))
+            remover_dado = funcoes.remover_dado(dados_rolados, guardados, p2)
+            dados_rolados = remover_dado[0]
+            guardados = remover_dado[1]   
+            print(f"Dados rolados: {dados_rolados}")
+            print(f"Dados guardados: {guardados}") 
+        elif pergunta == '3':
+            if rerrolagens == 0:
+                print("Você já usou todas as rerrolagens.")
+            else:
+                rerrolagens -= 1
+                n = 0
+                for dado in dados_rolados:
+                    n += 1
+                dados_rolados = funcoes.rolar_dados(n) 
+            print(f"Dados rolados: {dados_rolados}")
+            print(f"Dados guardados: {guardados}")  
+        elif pergunta == '4':
+            funcoes.imprime_cartela(cartela_de_pontos)
+            print(f"Dados rolados: {dados_rolados}")
+            print(f"Dados guardados: {guardados}")
+        else:
+            print("Opção inválida. Tente novamente.")
+        print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+        pergunta = input('>')
+    categoria_valida = False
+    while not categoria_valida:
+        print("Digite a combinação desejada:")
+        categoria = input('>')
+        if categoria in simples:  # simples = ['1', '2', '3', '4', '5', '6']
+            cat = int(categoria)  
+            if cartela_de_pontos['regra_simples'][cat] == -1:
+                funcoes.faz_jogada(guardados + dados_rolados, cat, cartela_de_pontos)
+                categoria_valida = True
+            else:
+                print("Essa combinação já foi utilizada.")
+        elif categoria in cartela_de_pontos['regra_avancada'].keys():
+            if cartela_de_pontos['regra_avancada'][categoria] == -1:
+                funcoes.faz_jogada(guardados + dados_rolados, categoria, cartela_de_pontos)
+                categoria_valida = True
+            else:
+                print("Essa combinação já foi utilizada.")
+        else:
+            print("Combinação inválida. Tente novamente.")
 
-    if pergunta1 == 1:
-        pp1 = input("Digite o índice do dado a ser guardado (0 a 4):")
-        dados_guardados.append(dados_rolados[pp1])
-        continue
-        
-    if pergunta1 == 2:
-        
-        continue
-    if pergunta1 == 3:
-        
-        continue
-    if pergunta1 == 4:
+for pontos in cartela_de_pontos['regra_simples'].values():
+    soma += pontos
+if soma >= 63:
+    soma += 35
+for pontos in cartela_de_pontos['regra_avancada'].values():
+    soma += pontos
 
-        continue
-    if pergunta1 == 0:
-
-        continue 
+funcoes.imprime_cartela(cartela_de_pontos)
+print(f"Pontuação total: {soma}")
